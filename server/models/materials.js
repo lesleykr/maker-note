@@ -1,4 +1,4 @@
-module.exports = {sequelize, DataTypes} => {
+module.exports = (sequelize, DataTypes) => {
     const Materials = sequelize.define('materials', {
         materialName: {
             type: DataTypes.STRING,
@@ -6,10 +6,10 @@ module.exports = {sequelize, DataTypes} => {
             unique: true
         },
         quantity: {
-            type: DataTypes.INTEGER
+            type: DataTypes.DECIMAL
         },
         costPerItem: {
-            type: DataTypes.INTEGER
+            type: DataTypes.DECIMAL
         },
         color: {
             type: DataTypes.STRING
@@ -30,5 +30,5 @@ module.exports = {sequelize, DataTypes} => {
             type: DataTypes.STRING(1000)
         }
     })
-    return Projects
+    return Materials
 };

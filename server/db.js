@@ -14,5 +14,19 @@ const sequelize = new Sequelize('maker-note', 'postgres', 'password', {
       }
   );
 
+  User = sequelize.import('./models/user');
+  Materials = sequelize.import('./models/materials');
+  Projects = sequelize.import('./models/projects');
+  PM = sequelize.import('./models/projectsMaterials');
+
+  User.hasMany(Projects);
+  Projects.belongsTo(User);
+
+  User.hasMany(Materials);
+  Materials.belongsTo(User);
+
+  Materials.belongsToMany(Projects, {through: PM})
+  Projects.belongsToMany(Materials, {through: PM})
+  
 
   module.exports = sequelize;
