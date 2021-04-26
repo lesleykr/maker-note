@@ -86,6 +86,8 @@ router.put("/update/:entryId", validateSession, function (req, res) {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
+
+//DELETE PROJECT ENDPOINT
 router.delete("/delete/:id", validateSession, function (req, res) {
     const query = {where: { id: req.params.id, userId: req.user.id}};
 
