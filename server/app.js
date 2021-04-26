@@ -11,9 +11,9 @@ sequelize.sync();
 app.use(express.json());
 //ALL OTHER app.use statements must be below the JSON one(above)!!!!
 
-app.use('/projects', projects);
-
 app.use('/user', user);
+
+app.use('/projects', projects);
 
 app.use('/materials', materials);
 

@@ -1,7 +1,9 @@
 let express = require('express');
 let router = express.Router();
 
-router.get('/practice', function(req, res){
+let validateSession = require('../middleware/validate-session');
+
+router.get('/practice', validateSession, function(req, res){
     res.send("this is a practice route");
 });
 
