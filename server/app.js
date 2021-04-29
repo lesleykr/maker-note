@@ -7,6 +7,7 @@ let user = require('./controllers/usercontroller');
 let materials = require('./controllers/materialscontroller');
 
 sequelize.sync();
+app.use(require('./middleware/headers'));
 
 app.use(express.json());
 //ALL OTHER app.use statements must be below the JSON one(above)!!!!
