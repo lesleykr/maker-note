@@ -2,14 +2,13 @@ module.exports = (sequelize, DataTypes) => {
     const Materials = sequelize.define('materials', {
         materialName: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            allowNull: false            
         },
         quantity: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.STRING
         },
         costPerItem: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.STRING
         },
         color: {
             type: DataTypes.STRING

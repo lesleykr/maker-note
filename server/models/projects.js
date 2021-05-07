@@ -2,29 +2,31 @@ module.exports = (sequelize, DataTypes) => {
     const Projects = sequelize.define('projects', {
         projectName: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            allowNull: false           
         },
         dateStarted: {
-            type: DataTypes.DATEONLY,            
+            type: DataTypes.STRING            
         },
         dateFinished: {
-            type: DataTypes.DATEONLY,            
+            type: DataTypes.STRING            
         },
         medium: {
             type: DataTypes.STRING
         },
         totalMaterialCost: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.STRING
         },
         forSale: {
             type: DataTypes.BOOLEAN
         },
+        public: {
+            type: DataTypes.BOOLEAN
+        },
         dateSold: {
-            type: DataTypes.DATEONLY
+            type: DataTypes.STRING
         },
         price: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.STRING
         },
         storeSoldAt: {
             type: DataTypes.STRING

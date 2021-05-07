@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         aboutMe: {
             type: DataTypes.STRING(1000)
         },
-        isAdmin: {
+        photo: {
+            type: DataTypes.STRING
+        },
+        admin: {
             type: DataTypes.BOOLEAN
         }
     })

@@ -34,7 +34,7 @@ router.post('/create', validateSession, (req, res) => {
 
 
 //GET ALL PROJECTS ENDPOINT
-router.get("/", (req, res) => {
+router.get("/", validateSession, (req, res) => {
     Projects.findAll()
         .then(projects => res.status(200).json(projects))
         .catch(err => res.status(500).json({ error: err }))
