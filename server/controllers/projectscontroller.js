@@ -3,6 +3,7 @@ let express = require('express');
 let router = express.Router();
 let validateSession = require('../middleware/validate-session');
 const Projects = require('../db').import('../models/projects');
+const PM = require('../db').import('../models/projectsMaterials');
 
 router.get('/practice', validateSession, function(req, res){
     res.send("this is a practice route");
@@ -96,6 +97,47 @@ router.delete("/delete/:id", validateSession, function (req, res) {
     .then(() => res.status(200).json({ message: "Project Removed"}))
     .catch((err) => res.status(500).json({ error: err }));
 });
+
+//db assoc
+router.post('/:pid/addmaterial/:mid', validateSession, (req, res) => {
+    const relationship = {
+        projectId: req.params.pid,
+        materialId: req.params.mid
+       
+}
+    PM.create(relationship)
+        .then(projects => res.status(200).json(projects))
+        .catch(err => res.status(500).json({ error: err }))
+});
+
+// //UPDATE PROJECT ENDPOINT w/ material
+// router.put("/update/:pid/:mid", async (req, res) => {
+//     try{
+//     const updateProjectsEntry = await Projects.add({
+//         projectName: req.body.projects.projectName,
+//         dateStarted: req.body.projects.dateStarted,
+//         dateFinished: req.body.projects.dateFinished,
+//         medium: req.body.projects.medium,
+//         totalMaterialCost: req.body.projects.totalMaterialCost,
+//         forSale: req.body.projects.forSale,
+//         dateSold: req.body.projects.dateSold,
+//         price: req.body.projects.price,
+//         storeSoldAt: req.body.projects.storeSoldAt,
+//         pictureUrl1: req.body.projects.pictureUrl1,
+//         pictureUrl2: req.body.projects.pictureUrl2,
+//         pictureUrl3: req.body.projects.pictureUrl3,            
+//         type: req.body.projects.type,
+//         notes: req.body.projects.notes,   
+//         {where: {id: req.params.pid, userId: req.user.id}},   
+//     })
+
+//     const updatepm = await PM.add({
+//         where: {projectId: req.params.pid, materialId: req.params.mid, userId: req.user.id}
+//     }) catch (err) {
+//     res.json({ error: err })
+// }
+// });
+
 
 
 module.exports = router;

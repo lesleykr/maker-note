@@ -53,6 +53,13 @@ router.post("/login", function (req, res) {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
+//GET ALL USERS
+router.get("/all", validateSession, (req, res) => {
+  User.findAll()
+      .then(user => res.status(200).json(user))
+      .catch(err => res.status(500).json({ error: err }))
+});
+
 //GET USER DETAILS
 router.get("/mine", validateSession, (req, res) => {
   let userid = req.user.id
