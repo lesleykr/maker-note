@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false           
         },
+        status: {
+            type: DataTypes.STRING            
+        },
         dateStarted: {
             type: DataTypes.STRING            
         },
@@ -13,10 +16,22 @@ module.exports = (sequelize, DataTypes) => {
         medium: {
             type: DataTypes.STRING
         },
+        technique: {
+            type: DataTypes.STRING            
+        },
+        dimensions: {
+            type: DataTypes.STRING            
+        },
+        tags: {
+            type: DataTypes.STRING            
+        },
         totalMaterialCost: {
             type: DataTypes.STRING
         },
         forSale: {
+            type: DataTypes.BOOLEAN
+        },
+        sold: {
             type: DataTypes.BOOLEAN
         },
         public: {
@@ -29,6 +44,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
         storeSoldAt: {
+            type: DataTypes.STRING
+        },
+        productUrl: {
             type: DataTypes.STRING
         },
         pictureUrl1: {
