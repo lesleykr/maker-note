@@ -23,6 +23,12 @@ router.post('/createmat', validateSession, (req, res) => {
         pictureUrl2: req.body.projects.pictureUrl2,
         pictureUrl3: req.body.projects.pictureUrl3,            
         type: req.body.projects.type,
+        status: req.body.projects.status,
+        technique: req.body.projects.technique,
+        dimensions: req.body.projects.dimensions,
+        tags: req.body.projects.tags,
+        sold: req.body.projects.sold,
+        productUrl: req.body.projects.productUrl,
         notes: req.body.projects.notes,
         userId: req.user.id
         })
