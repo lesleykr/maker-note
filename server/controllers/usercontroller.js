@@ -3,6 +3,7 @@ const User = require("../db").import("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 let validateSession = require('../middleware/validate-session');
+const cloudinary = require('cloudinary');
 
 //SIGNUP ENDPOINT
 router.post("/create", function (req, res) {
@@ -106,6 +107,46 @@ router.get("/myprojects", validateSession, (req, res) => {
   .then(user => res.status(200).json(user))
   .catch(err => res.status(500).json({ error: err }))
 });
+
+//IMAGE UPLOAD GET ENDPOINT
+router.get('/cloudsign', validateSession, async (req, res) => {
+  try {
+    const ts = Math.floor(new Date().getTime() / 1000).toString()
+
+    const sig = cloudinary.utils.api_sign_request(
+      {timestamp: ts, upload_preset: 'yawnhulb'},
+      process.env.CLOUDINARY_SECRET
+    )
+    res.status(200).json({
+      sig, ts
+    })
+
+  } catch (err) {
+    res.status(500).json({
+      message: 'failed to sign'
+    })
+  }
+})
+
+//IMAGE UPLOAD PUT ENDPOINT
+router.put('/imageset', validateSession, async (req, res) => {
+  try {
+    const user = await User.findOne({where: {id: req.user.id}})
+    // const user = await User.findOne({where: {id: req.user.id}})
+
+    const result = await user.update({
+      photo: req.body.url
+    })
+    res.status(200).json({
+      message: 'photo url saved',
+    })
+
+  }catch (err) {
+    res.status(500).json({
+      message: "failed to set image"
+    })
+  }
+})
 
 
 module.exports = router;
