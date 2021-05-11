@@ -32,6 +32,7 @@ router.post('/create', validateSession, (req, res) => {
         sold: req.body.projects.sold,
         productUrl: req.body.projects.productUrl,
         notes: req.body.projects.notes,
+    
         userId: req.user.id
 }
     Projects.create(projectsEntry)
@@ -121,6 +122,45 @@ router.post('/:pid/addmaterial/:mid', validateSession, (req, res) => {
         .then(projects => res.status(200).json(projects))
         .catch(err => res.status(500).json({ error: err }))
 });
+
+//IMAGE UPLOAD GET ENDPOINT
+router.get('/cloudsign', validateSession, async (req, res) => {
+    try {
+      const ts = Math.floor(new Date().getTime() / 1000).toString()
+  
+      const sig = cloudinary.utils.api_sign_request(
+        {timestamp: ts, upload_preset: 'yawnhulb'},
+        process.env.CLOUDINARY_SECRET
+      )
+      res.status(200).json({
+        sig, ts
+      })
+  
+    } catch (err) {
+      res.status(500).json({
+        message: 'failed to sign'
+      })
+    }
+  })
+  
+  //IMAGE UPLOAD PUT ENDPOINT
+  router.put('/imageset/:entryId', validateSession, async (req, res) => {
+    try {
+      const projects = await Projects.findOne({where: { id: req.params.entryId, userId: req.user.id}})
+        
+      const result = await projects.update({
+        pictureUrl1: req.body.url
+      })
+      res.status(200).json({
+        message: 'photo url saved',
+      })
+  
+    }catch (err) {
+      res.status(500).json({
+        message: "failed to set image"
+      })
+    }
+  })
 
 // //UPDATE PROJECT ENDPOINT w/ material
 // router.put("/update/:pid/:mid", async (req, res) => {
