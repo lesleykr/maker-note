@@ -22,5 +22,5 @@ app.use("/materials", materials);
 app.use("/pm", projectsmaterials);
 
 app.listen(3000, function () {
-  console.log("App is listening on post 3000");
+  console.log(`App is listening on port ${process.env.PORT}`);
 });
