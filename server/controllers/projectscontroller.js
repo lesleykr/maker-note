@@ -30,6 +30,7 @@ router.post("/create", validateSession, (req, res) => {
     dimensions: req.body.projects.dimensions,
     tags: req.body.projects.tags,
     sold: req.body.projects.sold,
+    public: req.body.projects.public,
     productUrl: req.body.projects.productUrl,
     notes: req.body.projects.notes,
 
@@ -89,6 +90,7 @@ router.put("/update/:entryId", validateSession, function (req, res) {
     dimensions: req.body.projects.dimensions,
     tags: req.body.projects.tags,
     sold: req.body.projects.sold,
+    public: req.body.projects.public,
     productUrl: req.body.projects.productUrl,
     notes: req.body.projects.notes,
   };
